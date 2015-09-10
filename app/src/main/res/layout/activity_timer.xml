@@ -8,28 +8,13 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 tools:context=".TimerActivity">
 
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:alpha="0.7"
-        android:paddingTop="8dp"
-        android:src="@drawable/logo"/>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
-        android:onClick="selectAnotherTime"
-        android:padding="10dp"
-        android:src="@drawable/ic_arrow_back"
-        android:tint="@color/indigo_300"/>
-
     <TextView
+        android:id="@+id/remainingLabel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:clickable="true"
+        android:onClick="startTimer"
         android:paddingBottom="190dp"
         android:text="R e m a i n i n g"
         android:textAllCaps="true"
@@ -42,6 +27,8 @@
         android:layout_centerInParent="true"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
+        android:clickable="true"
+        android:onClick="startTimer"
         android:paddingBottom="50dp"
         tools:text="11:54"
         android:textColor="@color/white_700"
@@ -65,5 +52,24 @@
             android:textSize="22sp"/>
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:alpha="0.7"
+        android:clickable="true"
+        android:paddingTop="8dp"
+        android:src="@drawable/logo"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:onClick="selectAnotherTime"
+        android:padding="10dp"
+        android:src="@drawable/ic_arrow_back"
+        android:tint="@color/indigo_300"/>
 
 </RelativeLayout>

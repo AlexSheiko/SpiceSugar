@@ -22,7 +22,7 @@ public class TimerActivity extends AppCompatActivity {
 
         mSecondsLeft = (long) (minutes * 60);
         TextView counterView = (TextView) findViewById(R.id.counterView);
-        counterView.setText(mSecondsLeft + "");
+        counterView.setText(formatTime(mSecondsLeft));
     }
 
     public void selectAnotherTime(View view) {
@@ -43,12 +43,16 @@ public class TimerActivity extends AppCompatActivity {
 
         startButton.setTextColor(getResources().getColor(R.color.indigo_300));
 
-        startButton.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pauseTimer();
             }
-        });
+        };
+        startButton.setOnClickListener(listener);
+        findViewById(R.id.counterView).setOnClickListener(listener);
+        findViewById(R.id.remainingLabel).setOnClickListener(listener);
+        findViewById(R.id.logoImageView).setOnClickListener(listener);
     }
 
     private void pauseTimer() {
@@ -63,12 +67,16 @@ public class TimerActivity extends AppCompatActivity {
 
         startButton.setTextColor(getResources().getColor(R.color.white_700));
 
-        startButton.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startTimer(view);
             }
-        });
+        };
+        startButton.setOnClickListener(listener);
+        findViewById(R.id.counterView).setOnClickListener(listener);
+        findViewById(R.id.remainingLabel).setOnClickListener(listener);
+        findViewById(R.id.logoImageView).setOnClickListener(listener);
     }
 
     private void startCountdown(long seconds) {
@@ -79,7 +87,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 long secondsLeft = millisUntilFinished / 1000;
 
-                counterView.setText(secondsLeft + "");
+                counterView.setText(formatTime(secondsLeft));
                 mSecondsLeft = secondsLeft;
             }
 
@@ -88,6 +96,10 @@ public class TimerActivity extends AppCompatActivity {
             }
         };
         mTimer.start();
+    }
+
+    private String formatTime(long s) {
+        return String.format("%02d:%02d", (s % 3600) / 60, (s % 60));
     }
 
     @Override
