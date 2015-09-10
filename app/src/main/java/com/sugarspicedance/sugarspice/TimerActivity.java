@@ -16,7 +16,6 @@ public class TimerActivity extends AppCompatActivity {
 
     CountDownTimer mTimer;
     private long mSecondsLeft;
-    private ObjectAnimator colorAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +24,7 @@ public class TimerActivity extends AppCompatActivity {
 
         int minutes = getIntent().getIntExtra("minutes", -1);
 
-//        mSecondsLeft = (long) (minutes * 60);
-        mSecondsLeft = 16;
+        mSecondsLeft = (long) (minutes * 60);
         TextView counterView = (TextView) findViewById(R.id.counterView);
         counterView.setText(formatTime(mSecondsLeft));
     }
@@ -95,27 +93,35 @@ public class TimerActivity extends AppCompatActivity {
 
                 counterView.setText(formatTime(secondsLeft));
                 mSecondsLeft = secondsLeft;
-
-                if (mSecondsLeft == 15) {
-                    startBlinkering(counterView);
-                }
             }
 
             public void onFinish() {
                 counterView.setText("00:00");
-                counterView.setTextColor(Color.RED);
-                colorAnim.cancel();
+                startBlinkering(counterView);
+
+                Button startButton = (Button) findViewById(R.id.startButton);
+                startButton.setText("E x i t");
+
+                View.OnClickListener listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onBackPressed();
+                    }
+                };
+                startButton.setOnClickListener(listener);
+                findViewById(R.id.counterView).setOnClickListener(listener);
+                findViewById(R.id.remainingLabel).setOnClickListener(listener);
+                findViewById(R.id.logoImageView).setOnClickListener(listener);
             }
         };
         mTimer.start();
     }
 
     private void startBlinkering(TextView textView) {
-        colorAnim = ObjectAnimator.ofInt(textView, "textColor",
+        ObjectAnimator colorAnim = ObjectAnimator.ofInt(textView, "textColor",
                 getResources().getColor(R.color.white_700), Color.RED);
         colorAnim.setEvaluator(new ArgbEvaluator());
-        colorAnim.setDuration(500);
-        colorAnim.setStartDelay(750);
+        colorAnim.setDuration(2000);
         colorAnim.setRepeatCount(ValueAnimator.INFINITE);
         colorAnim.setRepeatMode(ValueAnimator.REVERSE);
         colorAnim.start();
