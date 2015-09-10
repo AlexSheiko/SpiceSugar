@@ -16,6 +16,7 @@ public class TimerActivity extends AppCompatActivity {
 
     CountDownTimer mTimer;
     private long mSecondsLeft;
+    private ObjectAnimator colorAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,8 @@ public class TimerActivity extends AppCompatActivity {
 
         int minutes = getIntent().getIntExtra("minutes", -1);
 
-        mSecondsLeft = (long) (minutes * 60);
+//        mSecondsLeft = (long) (minutes * 60);
+        mSecondsLeft = 16;
         TextView counterView = (TextView) findViewById(R.id.counterView);
         counterView.setText(formatTime(mSecondsLeft));
     }
@@ -94,33 +96,38 @@ public class TimerActivity extends AppCompatActivity {
                 counterView.setText(formatTime(secondsLeft));
                 mSecondsLeft = secondsLeft;
 
-                if (mSecondsLeft == 245) {
+                if (mSecondsLeft == 15) {
                     startBlinkering(counterView);
                 }
             }
 
             public void onFinish() {
-                counterView.setText("done!");
+                counterView.setText("00:00");
+                counterView.setTextColor(Color.RED);
+                colorAnim.cancel();
             }
         };
         mTimer.start();
     }
 
     private void startBlinkering(TextView textView) {
-        ValueAnimator colorAnim = ObjectAnimator.ofInt(textView, "textColor",
+        colorAnim = ObjectAnimator.ofInt(textView, "textColor",
                 getResources().getColor(R.color.white_700), Color.RED);
         colorAnim.setEvaluator(new ArgbEvaluator());
-        colorAnim.setDuration(3000);
+        colorAnim.setDuration(500);
+        colorAnim.setStartDelay(750);
         colorAnim.setRepeatCount(ValueAnimator.INFINITE);
         colorAnim.setRepeatMode(ValueAnimator.REVERSE);
         colorAnim.start();
     }
 
     private String formatTime(long s) {
-        if (s != 3600) {
-            return String.format("%02d:%02d", (s % 3600) / 60, (s % 60));
-        } else {
+        if (s == 3600) {
             return "60:00";
+        } else if (s == 1) {
+            return "00:01";
+        } else {
+            return String.format("%02d:%02d", (s % 3600) / 60, (s % 60));
         }
     }
 
