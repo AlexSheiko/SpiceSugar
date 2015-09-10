@@ -43,7 +43,7 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:paddingBottom="50dp"
-        android:text="12:00"
+        tools:text="11:54"
         android:textColor="@color/white_700"
         android:textSize="120sp"/>
 
@@ -60,7 +60,7 @@
             style="@style/ButtonLarge"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:onClick="openTimer"
+            android:onClick="startTimer"
             android:text="S t a r t"
             android:textSize="22sp"/>
 
