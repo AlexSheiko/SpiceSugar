@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingBottom="32dp"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context=".TimerActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:tint="@color/indigo_300"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back"
+            android:onClick="selectAnotherTime"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.9"
+            android:layout_marginBottom="32dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/logo"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="R\u200ae\u200am\u200aa\u200ai\u200an\u200ai\u200an\u200ag"
+        android:textAllCaps="true"
+        android:textColor="@color/white_700"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:text="05:00"
+        android:textColor="@color/white_700"
+        android:textSize="120sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/pauseButton"
+            style="@style/ButtonSmall"
+            android:text="P\u200aa\u200au\u200as\u200ae"/>
+
+        <Button
+            android:id="@+id/endButton"
+            style="@style/ButtonSmall"
+            android:layout_alignParentRight="true"
+            android:text="E\u200an\u200ad"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

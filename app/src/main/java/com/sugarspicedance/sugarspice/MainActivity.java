@@ -1,9 +1,9 @@
 package com.sugarspicedance.sugarspice;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,25 +13,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    @SuppressWarnings("unused")
+    public void startTimer(View view) {
+        Intent intent = new Intent(this, TimerActivity.class);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (view.getId()) {
+            case R.id.mins_4:
+                intent.putExtra("minutes", 4);
+                break;
+            case R.id.mins_8:
+                intent.putExtra("minutes", 8);
+                break;
+            case R.id.mins_12:
+                intent.putExtra("minutes", 12);
+                break;
+            case R.id.mins_10:
+                intent.putExtra("minutes", 10);
+                break;
+            case R.id.mins_15:
+                intent.putExtra("minutes", 15);
+                break;
+            case R.id.mins_30:
+                intent.putExtra("minutes", 30);
+                break;
+            case R.id.mins_60:
+                intent.putExtra("minutes", 60);
+                break;
         }
 
-        return super.onOptionsItemSelected(item);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 }

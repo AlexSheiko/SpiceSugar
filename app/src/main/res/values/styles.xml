@@ -1,8 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">?colorPrimary</item>
+        <item name="buttonStyle">@style/CircularButton</item>
+    </style>
+
+    <style name="CircularButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/circular_button_selector</item>
+        <item name="android:textColor">@color/white_700</item>
+        <item name="android:paddingBottom">6dp</item>
+    </style>
+
+    <style name="ButtonLarge">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/large_button_diameter</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:onClick">startTimer</item>
+    </style>
+
+    <style name="ButtonSmall">
+        <item name="android:layout_width">@dimen/small_button_diameter</item>
+        <item name="android:layout_height">@dimen/small_button_diameter</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:paddingBottom">1dp</item>
     </style>
 
 </resources>
