@@ -17,7 +17,7 @@
         <item name="android:layout_height">@dimen/large_button_diameter</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:onClick">startTimer</item>
+        <item name="android:onClick">openTimer</item>
     </style>
 
     <style name="ButtonSmall">

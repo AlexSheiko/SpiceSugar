@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
-        android:alpha="0.9"
+        android:alpha="0.7"
         android:layout_marginBottom="32dp"
         android:paddingTop="8dp"/>
 
@@ -27,7 +27,7 @@
             style="@style/ButtonLarge"
             android:layout_marginRight="6dp"
             android:paddingBottom="5dp"
-            android:text="O\u200an\u200ae\nd\u200aa\u200an\u200ac\u200ae"
+            android:text="O n e\nd a n c e"
             android:id="@+id/mins_4"/>
 
         <Button
@@ -35,7 +35,7 @@
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:paddingBottom="5dp"
-            android:text="T\u200aw\u200ao\nd\u200aa\u200an\u200ac\u200ae\u200as"
+            android:text="T w o\nd a n c e s"
             android:textSize="17sp"
             android:id="@+id/mins_8"/>
 
@@ -44,7 +44,7 @@
             android:layout_marginLeft="6dp"
             android:paddingBottom="5dp"
             android:textSize="16sp"
-            android:text="T\u200ah\u200ar\u200ae\u200ae\nd\u200aa\u200an\u200ac\u200ae\u200as"
+            android:text="T h r e e\nd a n c e s"
             android:id="@+id/mins_12"/>
 
     </LinearLayout>
@@ -58,7 +58,7 @@
         <Button
             style="@style/ButtonLarge"
             android:layout_marginRight="6dp"
-            android:text="1\u200a0\nM\u200ai\u200an\u200as"
+            android:text="1 0\nM i n s"
             android:textSize="19sp"
             android:id="@+id/mins_10"/>
 
@@ -66,14 +66,14 @@
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            android:text="1\u200a5\nM\u200ai\u200an\u200as"
+            android:text="1 5\nM i n s"
             android:textSize="19sp"
             android:id="@+id/mins_15"/>
 
         <Button
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
-            android:text="3\u200a0\nM\u200ai\u200an\u200as"
+            android:text="3 0\nM i n s"
             android:textSize="18sp"
             android:id="@+id/mins_30"/>
 
@@ -94,7 +94,7 @@
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            android:text="6\u200a0\nM\u200ai\u200an\u200as"
+            android:text="6 0\nM i n s"
             android:textSize="18sp"
             android:id="@+id/mins_60"/>
 

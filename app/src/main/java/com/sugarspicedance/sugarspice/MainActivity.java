@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("unused")
-    public void startTimer(View view) {
+    public void openTimer(View view) {
         Intent intent = new Intent(this, TimerActivity.class);
 
         switch (view.getId()) {
@@ -42,6 +42,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         startActivity(intent);
-        overridePendingTransition(0, 0);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

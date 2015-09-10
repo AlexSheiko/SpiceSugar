@@ -1,70 +1,69 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingBottom="32dp"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context=".TimerActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="32dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context=".TimerActivity">
 
-    <FrameLayout
+    <ImageView
+        android:id="@+id/logoImageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:alpha="0.7"
+        android:paddingTop="8dp"
+        android:src="@drawable/logo"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackgroundBorderless"
-            android:tint="@color/indigo_300"
-            android:padding="10dp"
-            android:src="@drawable/ic_arrow_back"
-            android:onClick="selectAnotherTime"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.9"
-            android:layout_marginBottom="32dp"
-            android:paddingTop="8dp"
-            android:src="@drawable/logo"/>
-
-    </FrameLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:onClick="selectAnotherTime"
+        android:padding="10dp"
+        android:src="@drawable/ic_arrow_back"
+        android:tint="@color/indigo_300"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="R\u200ae\u200am\u200aa\u200ai\u200an\u200ai\u200an\u200ag"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingBottom="190dp"
+        android:text="R e m a i n i n g"
         android:textAllCaps="true"
         android:textColor="@color/white_700"/>
 
     <TextView
+        android:id="@+id/counterView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:fontFamily="sans-serif-light"
-        android:gravity="center_horizontal"
-        android:text="05:00"
+        android:gravity="center"
+        android:paddingBottom="50dp"
+        android:text="12:00"
         android:textColor="@color/white_700"
         android:textSize="120sp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom">
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/counterView"
+        android:layout_marginTop="-50dp"
+        android:gravity="center">
 
         <Button
-            android:id="@+id/pauseButton"
-            style="@style/ButtonSmall"
-            android:text="P\u200aa\u200au\u200as\u200ae"/>
-
-        <Button
-            android:id="@+id/endButton"
-            style="@style/ButtonSmall"
-            android:layout_alignParentRight="true"
-            android:text="E\u200an\u200ad"/>
+            android:id="@+id/startButton"
+            style="@style/ButtonLarge"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:onClick="openTimer"
+            android:text="S t a r t"
+            android:textSize="22sp"/>
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
