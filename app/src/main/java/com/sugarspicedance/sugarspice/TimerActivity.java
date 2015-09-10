@@ -1,5 +1,9 @@
 package com.sugarspicedance.sugarspice;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -89,6 +93,10 @@ public class TimerActivity extends AppCompatActivity {
 
                 counterView.setText(formatTime(secondsLeft));
                 mSecondsLeft = secondsLeft;
+
+                if (mSecondsLeft == 245) {
+                    startBlinkering(counterView);
+                }
             }
 
             public void onFinish() {
@@ -98,8 +106,22 @@ public class TimerActivity extends AppCompatActivity {
         mTimer.start();
     }
 
+    private void startBlinkering(TextView textView) {
+        ValueAnimator colorAnim = ObjectAnimator.ofInt(textView, "textColor",
+                getResources().getColor(R.color.white_700), Color.RED);
+        colorAnim.setEvaluator(new ArgbEvaluator());
+        colorAnim.setDuration(3000);
+        colorAnim.setRepeatCount(ValueAnimator.INFINITE);
+        colorAnim.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnim.start();
+    }
+
     private String formatTime(long s) {
-        return String.format("%02d:%02d", (s % 3600) / 60, (s % 60));
+        if (s != 3600) {
+            return String.format("%02d:%02d", (s % 3600) / 60, (s % 60));
+        } else {
+            return "60:00";
+        }
     }
 
     @Override
