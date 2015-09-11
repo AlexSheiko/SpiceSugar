@@ -97,7 +97,7 @@ public class TimerActivity extends AppCompatActivity {
 
             public void onFinish() {
                 counterView.setText("00:00");
-                startBlinkering(counterView);
+                startBlinkering(findViewById(R.id.container));
 
                 Button startButton = (Button) findViewById(R.id.startButton);
                 startButton.setText("E x i t");
@@ -117,11 +117,11 @@ public class TimerActivity extends AppCompatActivity {
         mTimer.start();
     }
 
-    private void startBlinkering(TextView textView) {
-        ObjectAnimator colorAnim = ObjectAnimator.ofInt(textView, "textColor",
-                getResources().getColor(R.color.white_700), Color.RED);
+    private void startBlinkering(View view) {
+        ObjectAnimator colorAnim = ObjectAnimator.ofInt(view, "backgroundColor",
+                Color.parseColor("#212121"), Color.RED);
         colorAnim.setEvaluator(new ArgbEvaluator());
-        colorAnim.setDuration(2000);
+        colorAnim.setDuration(1000);
         colorAnim.setRepeatCount(ValueAnimator.INFINITE);
         colorAnim.setRepeatMode(ValueAnimator.REVERSE);
         colorAnim.start();
