@@ -45,7 +45,7 @@ public class TimerActivity extends AppCompatActivity {
         getTheme().resolveAttribute(R.attr.selectableItemBackground, outValue, true);
         startButton.setBackgroundResource(outValue.resourceId);
 
-        startButton.setTextColor(getResources().getColor(R.color.indigo_300));
+        startButton.setTextColor(getResources().getColor(R.color.white_500));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -69,7 +69,7 @@ public class TimerActivity extends AppCompatActivity {
 
         startButton.setBackground(getResources().getDrawable(R.drawable.circular_button_selector));
 
-        startButton.setTextColor(getResources().getColor(R.color.white_700));
+        startButton.setTextColor(getResources().getColor(R.color.white_500));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override

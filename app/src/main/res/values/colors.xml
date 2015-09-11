@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="indigo_500">#3F51B5</color>
+    <color name="black_600">#706f6f</color>
+    <color name="black_800">#363636</color>
     <color name="indigo_300">#7986CB</color>
+    <color name="white_500">#82ffffff</color>
     <color name="white_700">#afffffff</color>
 </resources>

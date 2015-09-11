@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.mins_30:
                 intent.putExtra("minutes", 30);
                 break;
+            case R.id.mins_45:
+                intent.putExtra("minutes", 45);
+                break;
             case R.id.mins_60:
                 intent.putExtra("minutes", 60);
                 break;
