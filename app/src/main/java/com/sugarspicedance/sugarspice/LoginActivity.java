@@ -1,7 +1,9 @@
 package com.sugarspicedance.sugarspice;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -29,13 +31,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginAutomatically() {
+
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.orderByAscending("username");
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
-                    int number = getNextBoothNumber(users);
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                    int number = prefs.getInt("previous_booth_number", getNextBoothNumber(users));
+                    prefs.edit().putInt("previous_booth_number", number).apply();
+
                     String booth = "Booth " + number;
 
                     ParseUser user = new ParseUser();

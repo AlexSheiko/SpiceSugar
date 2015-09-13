@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.parse.DeleteCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -46,5 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ParseUser.getCurrentUser().deleteInBackground(new DeleteCallback() {
+            @Override
+            public void done(ParseException e) {
+                ParseUser.logOutInBackground();
+            }
+        });
     }
 }

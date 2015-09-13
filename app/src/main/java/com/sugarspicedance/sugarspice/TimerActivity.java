@@ -12,10 +12,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 public class TimerActivity extends AppCompatActivity {
 
     CountDownTimer mTimer;
     private long mSecondsLeft;
+    private ParseObject mTimerParse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,29 +41,45 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     public void startTimer(View view) {
-        startCountdown(mSecondsLeft);
-
-        findViewById(R.id.logoImageView).setAlpha(0.2f);
-
-        Button startButton = (Button) findViewById(R.id.startButton);
-        startButton.setText("P a u s e");
-
-        TypedValue outValue = new TypedValue();
-        getTheme().resolveAttribute(R.attr.selectableItemBackground, outValue, true);
-        startButton.setBackgroundResource(outValue.resourceId);
-
-        startButton.setTextColor(getResources().getColor(R.color.white_500));
-
-        View.OnClickListener listener = new View.OnClickListener() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Timer");
+        query.whereEqualTo("booth", ParseUser.getCurrentUser().getUsername());
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
-            public void onClick(View view) {
-                pauseTimer();
+            public void done(ParseObject timer, ParseException e) {
+                if (timer != null) {
+                    mTimerParse = timer;
+                } else {
+                    mTimerParse = new ParseObject("Timer");
+                }
+
+                mTimerParse.put("booth", ParseUser.getCurrentUser().getUsername());
+                mTimerParse.saveEventually();
+
+                startCountdown(mSecondsLeft);
+
+                findViewById(R.id.logoImageView).setAlpha(0.2f);
+
+                Button startButton = (Button) findViewById(R.id.startButton);
+                startButton.setText("P a u s e");
+
+                TypedValue outValue = new TypedValue();
+                getTheme().resolveAttribute(R.attr.selectableItemBackground, outValue, true);
+                startButton.setBackgroundResource(outValue.resourceId);
+
+                startButton.setTextColor(getResources().getColor(R.color.white_500));
+
+                View.OnClickListener listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        pauseTimer();
+                    }
+                };
+                startButton.setOnClickListener(listener);
+                findViewById(R.id.counterView).setOnClickListener(listener);
+                findViewById(R.id.remainingLabel).setOnClickListener(listener);
+                findViewById(R.id.logoImageView).setOnClickListener(listener);
             }
-        };
-        startButton.setOnClickListener(listener);
-        findViewById(R.id.counterView).setOnClickListener(listener);
-        findViewById(R.id.remainingLabel).setOnClickListener(listener);
-        findViewById(R.id.logoImageView).setOnClickListener(listener);
+        });
     }
 
     private void pauseTimer() {
@@ -93,6 +116,9 @@ public class TimerActivity extends AppCompatActivity {
 
                 counterView.setText(formatTime(secondsLeft));
                 mSecondsLeft = secondsLeft;
+
+                mTimerParse.put("secondsLeft", mSecondsLeft);
+                mTimerParse.saveEventually();
             }
 
             public void onFinish() {
@@ -112,6 +138,9 @@ public class TimerActivity extends AppCompatActivity {
                 findViewById(R.id.counterView).setOnClickListener(listener);
                 findViewById(R.id.remainingLabel).setOnClickListener(listener);
                 findViewById(R.id.logoImageView).setOnClickListener(listener);
+
+                mTimerParse.put("secondsLeft", 0);
+                mTimerParse.saveEventually();
             }
         };
         mTimer.start();
@@ -142,6 +171,10 @@ public class TimerActivity extends AppCompatActivity {
         super.onDestroy();
         if (mTimer != null) {
             mTimer.cancel();
+        }
+        if (mTimerParse != null) {
+            mTimerParse.put("secondsLeft", 0);
+            mTimerParse.saveEventually();
         }
     }
 }
