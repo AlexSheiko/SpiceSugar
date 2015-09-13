@@ -1,14 +1,14 @@
 package com.sugarspicedance.sugarspice;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -38,10 +38,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                    int number = prefs.getInt("previous_booth_number", getNextBoothNumber(users));
-                    prefs.edit().putInt("previous_booth_number", number).apply();
-
+                    int number = getNextBoothNumber(users);
                     String booth = "Booth " + number;
 
                     ParseUser user = new ParseUser();
@@ -51,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
                             if (e == null) {
+                                setupDummyTimer();
                                 showMainScreen();
                             } else {
                                 showErrorDialog(e);
@@ -60,6 +58,25 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     showErrorDialog(e);
                 }
+            }
+        });
+    }
+
+    private void setupDummyTimer() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Timer");
+        query.whereEqualTo("booth", ParseUser.getCurrentUser().getUsername());
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject timerObject, ParseException e) {
+                ParseObject timer;
+                if (timerObject != null) {
+                    timer = timerObject;
+                } else {
+                    timer = new ParseObject("Timer");
+                }
+                timer.put("booth", ParseUser.getCurrentUser().getUsername());
+                timer.put("secondsLeft", 0);
+                timer.saveEventually();
             }
         });
     }
