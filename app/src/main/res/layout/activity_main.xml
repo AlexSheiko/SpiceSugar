@@ -13,10 +13,10 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="88dp"
-        android:src="@drawable/logo"
-        android:alpha="0.7"
         android:layout_marginBottom="32dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:alpha="0.7"
+        android:src="@drawable/logo"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,28 +24,28 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/mins_4"
             style="@style/ButtonLarge"
             android:layout_marginRight="6dp"
             android:paddingBottom="5dp"
-            android:text="O n e\nd a n c e"
-            android:id="@+id/mins_4"/>
+            android:text="O n e\nd a n c e"/>
 
         <Button
+            android:id="@+id/mins_8"
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:paddingBottom="5dp"
             android:text="T w o\nd a n c e s"
-            android:textSize="17sp"
-            android:id="@+id/mins_8"/>
+            android:textSize="17sp"/>
 
         <Button
+            android:id="@+id/mins_12"
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
             android:paddingBottom="5dp"
-            android:textSize="16sp"
             android:text="T h r e e\nd a n c e s"
-            android:id="@+id/mins_12"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
@@ -56,26 +56,26 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/mins_10"
             style="@style/ButtonLarge"
             android:layout_marginRight="6dp"
             android:text="1 0\nM i n s"
-            android:textSize="19sp"
-            android:id="@+id/mins_10"/>
+            android:textSize="19sp"/>
 
         <Button
+            android:id="@+id/mins_15"
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:text="1 5\nM i n s"
-            android:textSize="19sp"
-            android:id="@+id/mins_15"/>
+            android:textSize="19sp"/>
 
         <Button
+            android:id="@+id/mins_30"
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
             android:text="3 0\nM i n s"
-            android:textSize="18sp"
-            android:id="@+id/mins_30"/>
+            android:textSize="18sp"/>
 
     </LinearLayout>
 
@@ -91,20 +91,20 @@
             android:layout_weight="0.5"/>
 
         <Button
+            android:id="@+id/mins_45"
             style="@style/ButtonLarge"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="7dp"
             android:text="45\nM i n s"
-            android:textSize="18sp"
-            android:id="@+id/mins_45"/>
+            android:textSize="18sp"/>
 
         <Button
+            android:id="@+id/mins_60"
             style="@style/ButtonLarge"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="6dp"
             android:text="6 0\nM i n s"
-            android:textSize="18sp"
-            android:id="@+id/mins_60"/>
+            android:textSize="18sp"/>
 
         <Space
             android:layout_width="0dp"
@@ -113,6 +113,13 @@
 
     </LinearLayout>
 
-    <!--TODO: Show booth #-->
+    <TextView
+        android:id="@+id/booth_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center_horizontal"
+        tools:text="Booth 1"
+        android:textSize="24sp"
+        android:textColor="#46ffffff"/>
 
 </LinearLayout>
