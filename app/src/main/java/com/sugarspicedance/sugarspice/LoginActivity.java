@@ -1,7 +1,9 @@
 package com.sugarspicedance.sugarspice;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -18,10 +20,13 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "SugarDebug";
+    private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (ParseUser.getCurrentUser() != null) {
             showMainScreen();
@@ -39,7 +44,12 @@ public class LoginActivity extends AppCompatActivity {
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
                     int number = getNextBoothNumber(users);
-                    String booth = getBoothName(number);
+                    String booth;
+                    if (mPrefs.getString("manual_booth", null) == null) {
+                        booth = getBoothName(number);
+                    } else {
+                        booth = mPrefs.getString("manual_booth", null);
+                    }
 
                     ParseUser user = new ParseUser();
                     user.setUsername(booth);

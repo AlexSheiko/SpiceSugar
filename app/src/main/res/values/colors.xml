@@ -5,4 +5,5 @@
     <color name="indigo_300">#7986CB</color>
     <color name="white_500">#82ffffff</color>
     <color name="white_700">#afffffff</color>
+    <color name="red_accent">#EC4555</color>
 </resources>
