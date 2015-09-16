@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
                     int number = getNextBoothNumber(users);
-                    String booth = "Booth " + number;
+                    String booth = getBoothName(number);
 
                     ParseUser user = new ParseUser();
                     user.setUsername(booth);
@@ -60,6 +60,22 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private String getBoothName(int number) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("BoothNames");
+        query.orderByAscending("name");
+        try {
+            List<ParseObject> boothes = query.find();
+            for (ParseObject booth : boothes) {
+                if (booth.getString("name").contains(number+"")) {
+                    return booth.getString("name");
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "No more boothes";
     }
 
     private void setupDummyTimer() {
@@ -85,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         int index = 1;
 
         for (ParseUser user : users) {
-            int number = Integer.parseInt(user.getUsername().replace("Booth ", ""));
+            int number = Integer.parseInt(user.getUsername().substring(0, 1));
             if (index != number) {
                 return index;
             } else {
@@ -102,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showErrorDialog(ParseException e) {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setMessage(e.getMessage());
+        builder.setMessage("Check your network connection and try again");
         builder.create().show();
     }
 }
