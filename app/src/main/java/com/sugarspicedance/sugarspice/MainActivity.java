@@ -4,11 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.parse.DeleteCallback;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +24,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((TextView) findViewById(R.id.booth_name)).setText(ParseUser.getCurrentUser().getUsername());
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                R.layout.booth_list_item, new ArrayList<String>());
+        Spinner boothSpinner = (Spinner) findViewById(R.id.booth_spinner);
+        boothSpinner.setAdapter(adapter);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("BoothNames");
+        query.orderByAscending("name");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> boothes, ParseException e) {
+                if (e == null) {
+                    for (ParseObject booth : boothes) {
+                        adapter.add(booth.getString("name"));
+                    }
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unused")
