@@ -10,6 +10,6 @@ public class SugarApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Parse.initialize(this, "HCJZabkKVVJfGQ9TX18kUOrvV3S4qyJwocuiKcML", "gIncYlqSus33jH7pVKHVDHaopAxqehbSwt0lckH7");
+        Parse.initialize(this, "OC8ApDFh9cc4PJDTRBuqmiUG6YUxaJxgc61IbeF8", "OeSxciiBuXYjFxM82Q0Lgz31e0MT6Reb5ZfoCEzb");
     }
 }

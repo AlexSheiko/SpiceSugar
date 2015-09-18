@@ -47,8 +47,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void done(List<ParseObject> boothes, ParseException e) {
                 if (e == null) {
-                    for (ParseObject booth : boothes) {
-                        adapter.add(booth.getString("name"));
+                    for (final ParseObject booth : boothes) {
+                        ParseQuery<ParseObject> timerQuery = ParseQuery.getQuery("Timer");
+                        timerQuery.whereEqualTo("booth", booth.getString("name"));
+                        timerQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(ParseObject timer, ParseException e) {
+                                if (timer == null) {
+                                    adapter.add(booth.getString("name"));
+                                }
+                            }
+                        });
                     }
                     int spinnerPosition = adapter.getPosition(ParseUser.getCurrentUser().getUsername());
                     boothSpinner.setSelection(spinnerPosition);
